@@ -1,0 +1,1 @@
+export const ACCENT_COLOR = '#113a5d'
