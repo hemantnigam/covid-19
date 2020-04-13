@@ -1,12 +1,11 @@
 <template>
   <v-app>
     <v-app-bar app :color="accentColor" dark fixed :elevateOnScroll="false" flat>
-      <v-app-bar-nav-icon @click="openDrawer = !openDrawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>COVID - 19</v-toolbar-title>
+      <v-toolbar-title class="ml-2">COVID - 19</v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
     <v-content>
-      <v-navigation-drawer
+      <!-- <v-navigation-drawer
         :color="accentColor"
         class="navigation-drawer"
         v-model="openDrawer"
@@ -25,13 +24,13 @@
             </v-list-item>
           </v-list-item-group>
         </v-list>
-      </v-navigation-drawer>
+      </v-navigation-drawer> -->
       <home v-if="activeBtn===0"></home>
       <search-tab v-if="activeBtn===1"></search-tab>
       <preventions v-if="activeBtn===2"></preventions>
-      <v-bottom-navigation @change="currentTab" :value="activeBtn" color="#f9f9f9" :background-color="accentColor" horizontal fixed light>
+      <v-bottom-navigation @change="currentTab" :value="activeBtn" class="justify-space-around" color="#f9f9f9" :background-color="accentColor" horizontal fixed light>
         <v-btn v-for="(tab,i) in tabs" :key="i">
-          <span>{{tab.text}}</span>
+          <!-- <span>{{tab.text}}</span> -->
           <v-icon>{{tab.icon}}</v-icon>
         </v-btn>
       </v-bottom-navigation>
@@ -91,5 +90,8 @@ export default {
 }
 .theme--light.v-bottom-navigation .v-btn:not(.v-btn--active) {
   color: #dae1e7 !important;
+}
+.v-item-group.v-bottom-navigation--horizontal .v-btn > .v-btn__content > .v-icon {
+  margin-right: 0px !important;
 }
 </style>
