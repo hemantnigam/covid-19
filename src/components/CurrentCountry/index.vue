@@ -46,9 +46,6 @@ export default {
   },
   mixins: [CommonMixin],
   created() {
-    // this.getCurrentName().then(data => {
-    //   this.country = data;
-    // });
     this.getCountryData();
   },
   methods: {
