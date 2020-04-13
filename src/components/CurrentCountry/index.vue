@@ -53,7 +53,7 @@ export default {
       if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     getCountryData: function() {
-      fetch("https://corona.lmao.ninja/v2/countries/India")
+      fetch("http://corona.lmao.ninja/v2/countries/India")
         .then(response => response.json())
         .then(data => {
           this.data = data;
