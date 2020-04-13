@@ -40,15 +40,15 @@ export default {
   name: "CurrentCountry",
   data() {
     return {
-      country: "",
+      country: "India",
       data: {}
     };
   },
   mixins: [CommonMixin],
   created() {
-    this.getCurrentName().then(data => {
-      this.country = data;
-    });
+    // this.getCurrentName().then(data => {
+    //   this.country = data;
+    // });
     this.getCountryData();
   },
   methods: {
@@ -56,7 +56,7 @@ export default {
       if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     getCountryData: function() {
-      fetch("https://corona.lmao.ninja/v2/countries/India")
+      fetch(`https://corona.lmao.ninja/v2/countries/${this.country}`)
         .then(response => response.json())
         .then(data => {
           this.data = data;
