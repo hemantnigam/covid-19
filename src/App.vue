@@ -26,7 +26,7 @@
           </v-list-item-group>
         </v-list>
       </v-navigation-drawer>
-      <total-cases></total-cases>
+      <total-cases :data="totalData"></total-cases>
     </v-content>
   </v-app>
 </template>
@@ -42,6 +42,7 @@ export default {
   data: () => ({
     openDrawer: false,
     item: 0,
+    totalData:{},
     items: [
       { text: "Real-Time", icon: "mdi-clock" },
       { text: "Audience", icon: "mdi-account" },
@@ -60,7 +61,10 @@ export default {
     getAllCases: function() {
       fetch("https://corona.lmao.ninja/all")
         .then(response => response.json())
-        .then(data => console.log(data));
+        .then(data => {
+          this.totalData = data;
+          console.log(this.totalData)
+        });
     }
   }
 };
