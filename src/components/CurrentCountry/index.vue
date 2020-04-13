@@ -1,7 +1,10 @@
 <template>
   <v-card class="mx-auto total-case-card" tile flat>
     <div class="mb-4">
-      <v-card-title>Country: <span class="ml-2 country-name">{{country.toUpperCase()}}</span></v-card-title>
+      <v-card-title>
+        Country:
+        <span class="ml-2 country-name">{{country.toUpperCase()}}</span>
+      </v-card-title>
     </div>
     <div class="title-container">
       <div class="d-flex justify-space-around">
@@ -45,15 +48,15 @@ export default {
   created() {
     this.getCurrentName().then(data => {
       this.country = data;
-      this.getCountryData();
     });
+    this.getCountryData();
   },
   methods: {
     numberWithCommas: function(x) {
       if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     getCountryData: function() {
-      fetch("http://corona.lmao.ninja/v2/countries/India")
+      fetch("https://corona.lmao.ninja/v2/countries/India")
         .then(response => response.json())
         .then(data => {
           this.data = data;
@@ -101,6 +104,6 @@ export default {
   margin-right: 10px;
 }
 .country-name {
-    font-size: 50px !important;
+  font-size: 50px !important;
 }
 </style>
