@@ -1,5 +1,8 @@
 <template>
-  <v-card class="mx-auto total-case-card" tile flat >
+  <v-card class="mx-auto total-case-card" tile flat>
+    <div class="mb-4">
+      <v-card-title>Country: <span class="ml-2 country-name">{{country.toUpperCase()}}</span></v-card-title>
+    </div>
     <div class="title-container">
       <div class="d-flex justify-space-around">
         <v-card-title>
@@ -18,33 +21,43 @@
     <div class="container">
       <div>
         <v-card-text>Today's Cases: {{numberWithCommas(data.todayCases)}}</v-card-text>
-        <v-card-text>Today's Deaths: {{numberWithCommas(data.todayDeaths)}}</v-card-text>
-        <v-card-text>Affected Countries: {{numberWithCommas(data.affectedCountries)}}</v-card-text>
+        <v-card-text>Today's Deaths: {{data.todayDeaths?numberWithCommas(data.todayDeaths):data.todayDeaths}}</v-card-text>
+        <v-card-text>Tests: {{numberWithCommas(data.tests)}}</v-card-text>
       </div>
       <div>
-        <v-img class="globe-img" src="../../assets/globe.png"></v-img>
+        <v-img class="globe-img" :src="data.countryInfo&&data.countryInfo.flag"></v-img>
       </div>
-    </div>
-    <div class="d-flex justify-end">
-      <div class="date">Updated at: {{formatDate(new Date(data.updated))}}</div>
     </div>
   </v-card>
 </template>
 
 <script>
+import CommonMixin from "../Mixins/mixins";
 export default {
-  name: "TotalCases",
-  props: {
-    data: Object
+  name: "CurrentCountry",
+  data() {
+    return {
+      country: "",
+      data: {}
+    };
+  },
+  mixins: [CommonMixin],
+  created() {
+    this.getCurrentName().then(data => {
+      this.country = data;
+      this.getCountryData();
+    });
   },
   methods: {
-    formatDate: function(d) {
-      let formatted = `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
-      return formatted;
-    },
     numberWithCommas: function(x) {
-      if(x)
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    getCountryData: function() {
+      fetch("https://corona.lmao.ninja/v2/countries/India")
+        .then(response => response.json())
+        .then(data => {
+          this.data = data;
+        });
     }
   }
 };
@@ -86,5 +99,8 @@ export default {
 .date {
   font-size: 10px;
   margin-right: 10px;
+}
+.country-name {
+    font-size: 50px !important;
 }
 </style>
