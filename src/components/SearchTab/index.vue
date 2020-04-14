@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isDataAvailable">
-      <v-expansion-panels focusable tile>
+      <v-expansion-panels accordion tile>
         <v-expansion-panel v-for="(country,i) in allCountriesData" :key="i">
           <v-expansion-panel-header>
             <div>{{country.country}}</div>
@@ -47,6 +47,11 @@ export default {
         .then(data => {
           this.allCountriesData = data;
           this.isDataAvailable = true;
+
+          this.allCountriesData.sort((a,b)=>{
+              return a.cases > b.cases ? -1 : 1;
+          })
+          console.log(this.allCountriesData)
         });
     }
   }
@@ -68,6 +73,7 @@ export default {
 }
 .image {
   width: 30px;
+  height: 20px;
 }
 .v-expansion-panel-header > *:not(.v-expansion-panel-header__icon) {
     flex:none;

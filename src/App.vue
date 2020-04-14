@@ -88,10 +88,14 @@ export default {
     rgb(238, 242, 243)
   );
 }
+
 .theme--light.v-bottom-navigation .v-btn:not(.v-btn--active) {
   color: #dae1e7 !important;
 }
 .v-item-group.v-bottom-navigation--horizontal .v-btn > .v-btn__content > .v-icon {
   margin-right: 0px !important;
+}
+.v-item-group.v-bottom-navigation .v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
+  height: 100% !important;
 }
 </style>

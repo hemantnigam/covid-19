@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <total-cases :data="totalData"></total-cases>
     <v-divider class="mt-4 mb-4"></v-divider>
     <current-country></current-country>
@@ -35,5 +35,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+ .home {
+     padding: 15px !important;
+ }
 </style>
