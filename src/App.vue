@@ -153,4 +153,7 @@ export default {
 .v-input--hide-details > .v-input__control > .v-input__slot {
   min-height: 35px !important;
 }
+.search-field {
+  width: 150px !important;
+}
 </style>
