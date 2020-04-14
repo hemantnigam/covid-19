@@ -6,7 +6,10 @@
         <span class="ml-2 country-name">{{country.toUpperCase()}}</span>
       </v-card-title>
     </div>
-    <div class="title-container">
+    <v-card-title>
+      <h3>Total: {{numberWithCommas(data.cases)}}</h3>
+    </v-card-title>
+    <!-- <div class="title-container">
       <div class="d-flex justify-space-around">
         <v-card-title>
           <h4>Total: {{numberWithCommas(data.cases)}}</h4>
@@ -20,9 +23,11 @@
           <h4>Recovered: {{numberWithCommas(data.recovered)}}</h4>
         </v-card-title>
       </div>
-    </div>
-    <div class="container">
+    </div> -->
+    <div class="container ml-1">
       <div>
+        <v-card-text>Deaths: {{data.deaths?numberWithCommas(data.deaths):data.deaths}}</v-card-text>
+        <v-card-text>Recovered: {{data.recovered?numberWithCommas(data.recovered):data.recovered}}</v-card-text>
         <v-card-text>Today's Cases: {{data.todayCases?numberWithCommas(data.todayCases):data.todayCases}}</v-card-text>
         <v-card-text>Today's Deaths: {{data.todayDeaths?numberWithCommas(data.todayDeaths):data.todayDeaths}}</v-card-text>
         <v-card-text>Tests: {{data.tests?numberWithCommas(data.tests):data.tests}}</v-card-text>
@@ -35,7 +40,7 @@
       <template v-slot:activator="{ on }">
         <v-btn
           @click="dialog=true"
-          class="ml-3"
+          class="ml-4"
           style="color:white"
           depressed
           tile

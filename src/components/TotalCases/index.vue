@@ -1,6 +1,9 @@
 <template>
   <v-card class="mx-auto total-case-card" tile flat>
-    <div class="title-container">
+    <v-card-title>
+      <h3>Total: {{numberWithCommas(data.cases)}}</h3>
+    </v-card-title>
+    <!-- <div class="title-container">
       <div class="d-flex justify-space-around">
         <v-card-title>
           <h4>Total: {{numberWithCommas(data.cases)}}</h4>
@@ -14,9 +17,11 @@
           <h4>Recovered: {{numberWithCommas(data.recovered)}}</h4>
         </v-card-title>
       </div>
-    </div>
-    <div class="container">
+    </div> -->
+    <div class="container ml-1">
       <div>
+        <v-card-text>Deaths: {{numberWithCommas(data.deaths)}}</v-card-text>
+        <v-card-text>Recovered: {{numberWithCommas(data.recovered)}}</v-card-text>
         <v-card-text>Today's Cases: {{numberWithCommas(data.todayCases)}}</v-card-text>
         <v-card-text>Today's Deaths: {{numberWithCommas(data.todayDeaths)}}</v-card-text>
         <v-card-text>Affected Countries: {{numberWithCommas(data.affectedCountries)}}</v-card-text>
@@ -30,7 +35,7 @@
       <template v-slot:activator="{ on }">
         <v-btn
           @click="dialog=true"
-          class="ml-3"
+          class="ml-4"
           style="color:white"
           depressed
           tile
