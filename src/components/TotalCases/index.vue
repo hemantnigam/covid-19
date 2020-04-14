@@ -18,7 +18,7 @@
         </v-card-title>
       </div>
     </div> -->
-    <div class="container ml-1">
+    <div class="container ml-4">
       <div>
         <v-card-text>Deaths: {{numberWithCommas(data.deaths)}}</v-card-text>
         <v-card-text>Recovered: {{numberWithCommas(data.recovered)}}</v-card-text>
