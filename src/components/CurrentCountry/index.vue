@@ -23,30 +23,59 @@
     </div>
     <div class="container">
       <div>
-        <v-card-text>Today's Cases: {{numberWithCommas(data.todayCases)}}</v-card-text>
+        <v-card-text>Today's Cases: {{data.todayCases?numberWithCommas(data.todayCases):data.todayCases}}</v-card-text>
         <v-card-text>Today's Deaths: {{data.todayDeaths?numberWithCommas(data.todayDeaths):data.todayDeaths}}</v-card-text>
-        <v-card-text>Tests: {{numberWithCommas(data.tests)}}</v-card-text>
+        <v-card-text>Tests: {{data.tests?numberWithCommas(data.tests):data.tests}}</v-card-text>
       </div>
       <div>
         <v-img class="globe-img" :src="data.countryInfo&&data.countryInfo.flag"></v-img>
       </div>
     </div>
+    <v-dialog v-model="dialog" width="500">
+      <template v-slot:activator="{ on }">
+        <v-btn
+          @click="dialog=true"
+          class="ml-3"
+          style="color:white"
+          depressed
+          tile
+          small
+          color="#113a5d"
+          v-on="on"
+        >Stats</v-btn>
+      </template>
+      <chart-card
+        @close="dialog=false"
+        :casesData="casesData"
+        :deathsData="deathsData"
+        :recoveredData="recoveredData"
+      ></chart-card>
+    </v-dialog>
   </v-card>
 </template>
 
 <script>
 import CommonMixin from "../Mixins/mixins";
+import ChartCard from "../ChartCard";
 export default {
   name: "CurrentCountry",
+  components: {
+    ChartCard
+  },
   data() {
     return {
       country: "India",
-      data: {}
+      data: {},
+      dialog: false,
+      casesData: [],
+      deathsData: [],
+      recoveredData: []
     };
   },
   mixins: [CommonMixin],
   created() {
     this.getCountryData();
+    this.getChart();
   },
   methods: {
     numberWithCommas: function(x) {
@@ -58,6 +87,26 @@ export default {
         .then(data => {
           this.data = data;
         });
+    },
+    getChart: function() {
+      fetch(
+        `https://corona.lmao.ninja/v2/historical/${
+          this.country
+        }?lastdays=${this.getDays()}`
+      )
+        .then(response => response.json())
+        .then(result => {
+          this.casesData = Object.entries(result.timeline.cases);
+          this.deathsData = Object.entries(result.timeline.deaths);
+          this.recoveredData = Object.entries(result.timeline.recovered);
+        });
+    },
+    getDays: function() {
+      let oneDay = 24 * 60 * 60 * 1000;
+      let diffDays = Math.round(
+        Math.abs(new Date(2020, 1, 1) - new Date()) / oneDay
+      );
+      return diffDays;
     }
   }
 };

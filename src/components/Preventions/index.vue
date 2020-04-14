@@ -1,6 +1,6 @@
 <template>
   <div class="ml-4 mt-4 mr-4 mb-4">
-    <h1>Coronavirus Precautions</h1>
+    <h2>Coronavirus Precautions</h2>
     <ul>
       <li v-for="(prevention,i) in preventions" :key="i">
           {{prevention}}

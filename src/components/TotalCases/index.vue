@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto total-case-card" tile flat >
+  <v-card class="mx-auto total-case-card" tile flat>
     <div class="title-container">
       <div class="d-flex justify-space-around">
         <v-card-title>
@@ -25,6 +25,28 @@
         <v-img class="globe-img" src="../../assets/globe.png"></v-img>
       </div>
     </div>
+
+    <v-dialog v-model="dialog" width="500">
+      <template v-slot:activator="{ on }">
+        <v-btn
+          @click="dialog=true"
+          class="ml-3"
+          style="color:white"
+          depressed
+          tile
+          small
+          color="#113a5d"
+          v-on="on"
+        >Stats</v-btn>
+      </template>
+      <chart-card
+        @close="dialog=false"
+        :casesData="casesData"
+        :deathsData="deathsData"
+        :recoveredData="recoveredData"
+      ></chart-card>
+    </v-dialog>
+
     <div class="d-flex justify-end">
       <div class="date">Updated at: {{formatDate(new Date(data.updated))}}</div>
     </div>
@@ -32,19 +54,44 @@
 </template>
 
 <script>
+import ChartCard from "../ChartCard";
+
 export default {
   name: "TotalCases",
+  components: {
+    ChartCard
+  },
   props: {
     data: Object
   },
+  data() {
+    return {
+      dialog: false,
+      casesData: [],
+      deathsData: [],
+      recoveredData: []
+    };
+  },
+  mounted() {
+    this.getChart();
+  },
   methods: {
     formatDate: function(d) {
-      let formatted = `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+      let formatted = `${d.getDate()}-${d.getMonth() +
+        1}-${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
       return formatted;
     },
     numberWithCommas: function(x) {
-      if(x)
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    getChart: function() {
+      fetch("https://corona.lmao.ninja/v2/historical/all")
+        .then(response => response.json())
+        .then(result => {
+          this.casesData = Object.entries(result.cases);
+          this.deathsData = Object.entries(result.deaths);
+          this.recoveredData = Object.entries(result.recovered);
+        });
     }
   }
 };
@@ -86,5 +133,8 @@ export default {
 .date {
   font-size: 10px;
   margin-right: 10px;
+}
+.stats-button {
+  color: white !important;
 }
 </style>
