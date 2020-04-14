@@ -97,6 +97,10 @@ export default {
       if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     getChart: async function(country) {
+      this.dialog = true;
+      this.casesData = [];
+      this.deathsData = [];
+      this.recoveredData = [];
       this.country = country;
       let response = await fetch(
         `https://corona.lmao.ninja/v2/historical/${
@@ -107,7 +111,6 @@ export default {
       this.casesData = Object.entries(result.timeline.cases);
       this.deathsData = Object.entries(result.timeline.deaths);
       this.recoveredData = Object.entries(result.timeline.recovered);
-      this.dialog = true;
     },
     getDays: function() {
       let oneDay = 24 * 60 * 60 * 1000;
