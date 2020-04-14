@@ -31,7 +31,7 @@
         <v-img class="globe-img" :src="data.countryInfo&&data.countryInfo.flag"></v-img>
       </div>
     </div>
-    <v-dialog v-model="dialog" width="500">
+    <v-dialog v-model="dialog">
       <template v-slot:activator="{ on }">
         <v-btn
           @click="dialog=true"

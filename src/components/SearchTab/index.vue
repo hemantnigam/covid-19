@@ -19,7 +19,7 @@
                   <div>Recovered: {{numberWithCommas(country.recovered)}}</div>
                 </div>
                 <div class="d-flex justify-start mt-2">
-                  <v-dialog v-model="dialog" width="500">
+                  <v-dialog v-model="dialog">
                     <template v-slot:activator="{ on }">
                       <v-btn
                         @click="getChart(country.country)"

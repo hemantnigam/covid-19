@@ -16,6 +16,27 @@
           rounded
           dense
         ></v-text-field>
+        <v-dialog v-model="dialog">
+          <template v-slot:activator="{ on }">
+            <v-icon @click="dialog = true" class="ml-4" v-on="on">mdi-message-alert</v-icon>
+          </template>
+          <v-card>
+            <v-card-title class="headline" primary-title>Contact us</v-card-title>
+            <div class="contact-details">
+              <ol>
+                <li>Developer: Hemant Nigam</li>
+                <li>Email: <a href="mailto:h.nigam654@gmail.com">h.nigam654@gmail.com</a></li>
+                <li>Github: <a href="https://github.com/hemantnigam">https://github.com/hemantnigam</a></li>
+              </ol>
+            </div>
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="#113a5d" text @click="dialog = false">Close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-app-bar>
     </div>
     <div style="margin-bottom: 56px; height:100%">
@@ -24,20 +45,6 @@
         <search-tab ref="searchTab" v-if="activeBtn===1" @allData="allData"></search-tab>
         <preventions v-if="activeBtn===2"></preventions>
       </v-content>
-      <!-- <v-btn
-        @click="scrollToTop"
-        color="pink"
-        class="float-button"
-        dark
-        small
-        fixed
-        bottom
-        right
-        fab
-        v-if="activeBtn===1"
-      >
-        <v-icon>mdi-chevron-up</v-icon>
-      </v-btn>-->
     </div>
     <v-bottom-navigation
       @change="currentTab"
@@ -73,6 +80,7 @@ export default {
     openDrawer: false,
     item: 0,
     searchText: "",
+    dialog: false,
     activeBtn: 0,
     items: [
       { text: "Home", icon: "mdi-home" },
@@ -155,5 +163,20 @@ export default {
 }
 .search-field {
   width: 150px !important;
+}
+.feedback-btn {
+  background-color: transparent !important;
+}
+.headline {
+  background-color: #113a5d;
+  color: white;
+}
+.contact-details {
+  height: 200px;
+  display: flex;
+  align-items: center;
+}
+li {
+  margin-bottom: 10px;
 }
 </style>

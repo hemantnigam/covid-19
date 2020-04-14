@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <v-dialog v-model="dialog" width="500">
+    <v-dialog v-model="dialog">
       <template v-slot:activator="{ on }">
         <v-btn
           @click="dialog=true"
