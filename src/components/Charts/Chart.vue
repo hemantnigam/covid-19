@@ -67,6 +67,7 @@ export default {
             name: "Cases",
             data: this.casesData,
             type: "line",
+            symbolSize:0
             // lineStyle: {
             //   color: "#ffb174"
             // }
@@ -75,6 +76,7 @@ export default {
             name: "Deaths",
             data: this.deathsData,
             type: "line",
+            symbolSize:0
             // lineStyle: {
             //   color: "#f85959"
             // }
@@ -83,6 +85,7 @@ export default {
             name: "Recovered",
             data: this.recoveredData,
             type: "line",
+            symbolSize:0
             // lineStyle: {
             //   color: "#21e6c1"
             // }
