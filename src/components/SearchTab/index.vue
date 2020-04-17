@@ -5,7 +5,7 @@
         <virtual-list :size="20" :remain="50" class="virtual-list">
           <v-expansion-panel v-for="(country,i) in allCountriesData" :key="i" :id="i">
             <v-expansion-panel-header>
-              <div>{{country.country}}</div>
+              <div><span class="mr-2">{{i+1}}.</span><span>{{country.country}}</span></div>
               <img class="image ml-2" :src="country.countryInfo.flag" />
               <div class="ml-6">{{numberWithCommas(country.cases)}}</div>
             </v-expansion-panel-header>
