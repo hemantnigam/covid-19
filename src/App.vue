@@ -25,8 +25,14 @@
             <div class="contact-details">
               <ol>
                 <li>Developer: Hemant Nigam</li>
-                <li>Email: <a href="mailto:h.nigam654@gmail.com">h.nigam654@gmail.com</a></li>
-                <li>Github: <a href="https://github.com/hemantnigam">https://github.com/hemantnigam</a></li>
+                <li>
+                  Email:
+                  <a href="mailto:h.nigam654@gmail.com">h.nigam654@gmail.com</a>
+                </li>
+                <li>
+                  Github:
+                  <a href="https://github.com/hemantnigam">https://github.com/hemantnigam</a>
+                </li>
               </ol>
             </div>
             <v-divider></v-divider>
@@ -103,6 +109,11 @@ export default {
         );
       } else this.$refs.searchTab.allCountriesData = this.allCountriesData;
     }
+  },
+  created() {
+    caches.keys().then(function(names) {
+      for (let name of names) caches.delete(name);
+    });
   },
   computed: {
     accentColor: function() {
