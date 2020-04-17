@@ -67,10 +67,12 @@ export default {
   components: {
     ChartCard
   },
+  props: {
+    country: String,
+    data: Object
+  },
   data() {
     return {
-      country: "India",
-      data: {},
       dialog: false,
       casesData: [],
       deathsData: [],
@@ -79,19 +81,11 @@ export default {
   },
   mixins: [CommonMixin],
   created() {
-    this.getCountryData();
     this.getChart();
   },
   methods: {
     numberWithCommas: function(x) {
       if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    },
-    getCountryData: function() {
-      fetch(`https://corona.lmao.ninja/v2/countries/${this.country}`)
-        .then(response => response.json())
-        .then(data => {
-          this.data = data;
-        });
     },
     getChart: function() {
       fetch(
