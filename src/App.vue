@@ -55,7 +55,7 @@
     <v-bottom-navigation
       @change="currentTab"
       :value="activeBtn"
-      class="justify-space-around"
+      class="justify-space-around bottom-navigation"
       color="#f9f9f9"
       :background-color="accentColor"
       horizontal
@@ -189,5 +189,10 @@ export default {
 }
 li {
   margin-bottom: 10px;
+}
+.bottom-navigation > .v-btn {
+  width: 100% !important;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 </style>
